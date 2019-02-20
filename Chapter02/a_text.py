@@ -16,8 +16,8 @@ def common_words(text1, text2):
     """ Return common words across text1 and text2 """
     
     # A text is a collection of strings split using newlines
-    strings1 = text1.split(“\n”)
-    strings2 = text2.split(“\n”)
+    strings1 = text1.split("\n")
+    strings2 = text2.split("\n")
     
     common = []
     for string1 in strings1:
