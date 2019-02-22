@@ -26,3 +26,7 @@ def common_words(text1, text2):
         
     # Drop duplicates
     return list(set(common))
+
+if __name__ == "__main__":
+    x = common_words("abcdefgji\nhel\nabj", "helloworldjiji\nmnj\nabj")
+    print(x)

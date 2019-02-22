@@ -24,7 +24,7 @@ class TextRank(object):
         
         for fpath in self.filenames:
             data = open(fpath).read()
-            words = map(lambda x: x.lower().strip(), data.split())
+            words = list(map(lambda x: x.lower().strip(), data.split()))
             # Filter empty words
             count = words.count(self.word)
             occurs.append((fpath, count))
@@ -54,4 +54,4 @@ class TextRank(RankBase):
 
 if __name__ == "__main__":
     import sys
-    print TextRank('common',*sys.argv[1:]).rank()
+    print(TextRank('common',*sys.argv[1:]).rank())

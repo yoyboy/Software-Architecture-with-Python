@@ -6,7 +6,7 @@
 
 def squares(narray):
     """ Return array of squares of numbers """
-    return pow_n(array, 2)
+    return pow_n(narray, 2)
 
 def cubes(narray):
     """ Return array of cubes of numbers """
@@ -24,10 +24,9 @@ def frequency(string, word):
     string_l = string.lower()
 
     # Words in string
-    words = string_l.split()
-    count = w.count(word_l)
+    count = string_l.count(word_l)
 
     # Return frequency as percentage
-    return 100.0*count/len(words)
+    return 100.0*count/len(string_l)
 
 

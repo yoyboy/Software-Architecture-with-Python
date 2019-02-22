@@ -21,7 +21,7 @@ class TextRank(object):
 
         for fpath in self.filenames:
             data = open(fpath).read()
-            words = map(lambda x: x.lower().strip(), data.split())
+            words = list(map(lambda x: x.lower().strip(), data.split()))
             # Filter empty words
             count = words.count(self.word)
             occurs.append((fpath, count))

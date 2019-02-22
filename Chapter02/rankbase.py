@@ -20,7 +20,7 @@ class RankBase(object):
         
         for idx,text in enumerate(texts):
             # print text
-            words = map(lambda x: x.lower().strip(), text.split())
+            words = list(map(lambda x: x.lower().strip(), text.split()))
             count = words.count(self.word)
             occurs[idx] = count
 
