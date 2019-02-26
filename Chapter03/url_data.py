@@ -2,6 +2,8 @@
 import hashlib
 import requests
 
+url = "http://www.baidu.com"
+
 def get_url_data(url):
     """ Return data for a URL """
 
@@ -9,36 +11,42 @@ def get_url_data(url):
     # which is a hash of the URL
     data = requests.get(url).content
     # Save it in a filename
-    filename = hashlib.md5(url).hexdigest()
-    open(filename, 'w').write(data)
+    filename = hashlib.md5(url.encode("utf8")).hexdigest()
+#     open(filename, 'w').write(data)
+    with open(filename, "w") as fileObj:
+            fileObj.write(data.decode("utf8"))
     return data
 
-import os
+data = get_url_data(url)
 
-def get_url_data_stub(url):
-    """ Stub function replacing get_url_data """
+print(data)
+
+# import os
+
+# def get_url_data_stub(url):
+#     """ Stub function replacing get_url_data """
     
-    # No actual web request is made, instead 
-    # the file is opened and data returned
-    filename = hashlib.md5(url).hexdigest()
-    if os.path.isfile(filename):
-        return open(filename).read()
+#     # No actual web request is made, instead 
+#     # the file is opened and data returned
+#     filename = hashlib.md5(url).hexdigest()
+#     if os.path.isfile(filename):
+#         return open(filename).read()
 
 
-def get_url_data(url):
-    """ Return data for a URL """
+# def get_url_data(url):
+#     """ Return data for a URL """
 
-    # First check for cached file - if so return its
-    # contents. Note that we are not checking for
-    # age of the file - so content may be stale.
-    filename = hashlib.md5(url).hexdigest()
-    if os.path.isfile(filename):
-        return open(filename).read()
+#     # First check for cached file - if so return its
+#     # contents. Note that we are not checking for
+#     # age of the file - so content may be stale.
+#     filename = hashlib.md5(url).hexdigest()
+#     if os.path.isfile(filename):
+#         return open(filename).read()
     
-    # First time - so fetch the URL and write to the
-    # file. In subsequent calls, the file contents will
-    # be returned.
-    data = requests.get(url).content
-    open(filename, 'w').write(data)
+#     # First time - so fetch the URL and write to the
+#     # file. In subsequent calls, the file contents will
+#     # be returned.
+#     data = requests.get(url).content
+#     open(filename, 'w').write(data)
     
-    return data
+#     return data
