@@ -89,7 +89,7 @@ class ThumbnailImageSemaSaver(object):
         filename = ''.join((pieces[-2],'_',pieces[-1].split('.')[0],format))        
         try:
             im.thumbnail(size, Image.ANTIALIAS)
-            im.save(filename)
+            im.save("/Users/macbook/Documents/GitHub/Software-Architecture-with-Python/Chapter05/img/" + filename)
             print('Saved',filename)
             self.count += 1
         except Exception as e:
@@ -173,4 +173,4 @@ if __name__ == '__main__':
         t.stop()
         print('Stopped',t, flush=True)
 
-    print('Total number of PNG images',len(glob.glob('*.png')))
+    print('Total number of PNG images',len(glob.glob('./img/*.png')))
