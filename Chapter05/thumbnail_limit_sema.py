@@ -150,7 +150,7 @@ if __name__ == '__main__':
 
     os.system('rm -f *.png')
     q = Queue(maxsize=2000)
-    saver = ThumbnailImageSemaSaver(limit=100)
+    saver = ThumbnailImageSemaSaver(limit=10)
 
     producers, consumers = [], []
     for i in range(3):
