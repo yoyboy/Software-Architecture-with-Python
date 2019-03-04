@@ -12,6 +12,21 @@ def number_generator(m, n):
     """ A number generator co-routine in range(m...n+1) """
     yield from range(m, n+1)
 
+async def square_mapper(m, n):
+    """ Square mapper co-routine """
+    
+    squares = []
+
+    for i in number_generator(m, n):
+        print('Square=>',i*i)       
+        squares.append(i*i)
+
+        # At this point the co-routine suspends execution
+        # so that another co-routine can be scheduled.      
+        await asyncio.sleep(0.1)
+        
+    return squares
+
 async def prime_filter(m, n):
     """ Prime number co-routine """
     
@@ -31,30 +46,19 @@ async def prime_filter(m, n):
 
         # At this point the co-routine suspends execution
         # so that another co-routine can be scheduled.
-        await asyncio.sleep(1.0)
+        await asyncio.sleep(0.1)
         
     return tuple(primes)
 
-async def square_mapper(m, n):
-    """ Square mapper co-routine """
-    
-    squares = []
-
-    for i in number_generator(m, n):
-        print('Square=>',i*i)       
-        squares.append(i*i)
-
-        # At this point the co-routine suspends execution
-        # so that another co-routine can be scheduled.      
-        await asyncio.sleep(1.0)
-        
-    return squares
 
 def print_result(future):
+    # print("futurn_type: ", type(future))
+    print("type of Result: ", type(future.result()))
+    # future.result()返回的顺序是 asyncio.gather调用任务函数的顺序
     print('Result=>',future.result())
         
 loop = asyncio.get_event_loop()
-future = asyncio.gather(prime_filter(10, 50), square_mapper(10, 50))
+future = asyncio.gather(square_mapper(10, 50), prime_filter(10, 50))
 future.add_done_callback(print_result)
 loop.run_until_complete(future)
 

@@ -14,7 +14,8 @@ def factorial(n):
     return functools.reduce(operator.mul, [i for i in range(1, n+1)])
 
 with ThreadPoolExecutor(max_workers=2) as executor:
-    future_map = {executor.submit(factorial, n): n for n in range(10, 21)}
+    future_map = {executor.submit(factorial, n): n for n in range(1, 10)}
+    print("len of future_map: ", len(future_map))
     for future in as_completed(future_map):
         num = future_map[future]
         print('Factorial of',num,'is',future.result())

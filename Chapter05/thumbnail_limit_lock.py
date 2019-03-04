@@ -12,7 +12,7 @@ import string
 import random
 import uuid
 import urllib.request
-from PIL import Image
+# from PIL import Image
 from queue import Queue
 
 class ThumbnailURL_Generator(threading.Thread):
@@ -71,7 +71,7 @@ class ThumbnailImageSaver(object):
         im=Image.open(urllib.request.urlopen(url))
         # filename is last two parts of URL minus extension + '.format'
         pieces = url.split('/')
-        filename = ''.join((pieces[-2],'_',pieces[-1].split('.')[0],'_thumb',format))
+        filename = ''.join((pieces[-2],'_',pieces[-1].split(    '.')[0],'_thumb',format))
         im.thumbnail(size, Image.ANTIALIAS)
         im.save(filename)
         print('Saved',filename)

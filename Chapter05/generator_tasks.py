@@ -26,8 +26,6 @@ def square_mapper(numbers):
         
 def prime_filter(numbers):
     """ A co-routine which yields prime numbers """
-
-    primes = []
     for n in numbers:
         if n % 2 == 0: continue
         flag = True
@@ -45,7 +43,7 @@ def scheduler(tasks, runs=10000):
 
     results = collections.defaultdict(list)
     
-    for i in range(runs):
+    for _ in range(runs):
         for t in tasks:
             print('Switching to task',t.__name__)
             try:
@@ -68,6 +66,7 @@ if __name__ == "__main__":
     tasks.append(prime_filter(number_generator(limit)))  
     
     results = scheduler(tasks, runs=limit)
+    # print("Results: ", results)
     print('Last prime=>',results['prime_filter'][-1])
     end = time.clock()
     print('Time taken=>',end-start)

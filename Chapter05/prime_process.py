@@ -12,6 +12,7 @@ $ time python3 prime_process.py > /dev/null
 
 import multiprocessing
 from queue import Queue, Empty
+import datetime
 
 def is_prime(n):
     """ Check for input number primality """
@@ -25,11 +26,15 @@ def is_prime(n):
     return True
 
 if __name__ == "__main__":
+
+    begin = datetime.datetime.now()
     numbers = [1297337, 1116281, 104395303,
                472882027, 533000389, 817504243,
                982451653, 112272535095293,
-               115280095190773, 1099726899285419]*100
+               115280095190773, 1099726899285419]*5
 
     pool = multiprocessing.Pool(4)
     pool.map(is_prime, numbers)
+    end = datetime.datetime.now()
+    print(end - begin)
         

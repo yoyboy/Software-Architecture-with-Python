@@ -12,6 +12,7 @@ $ time python3 prime_thread.py > /dev/null
 
 import threading
 from queue import Queue, Empty
+import datetime
 
 def is_prime(n):
     """ Check for input number primality """
@@ -33,7 +34,6 @@ class PrimeChecker(threading.Thread):
         threading.Thread.__init__(self)     
 
     def run(self):
-
         while self.flag:
             try:
                 n = self.queue.get(timeout=1)
@@ -45,25 +45,33 @@ class PrimeChecker(threading.Thread):
         """ Stop the thread """
 
         self.flag = False           
-            
-if __name__ == "__main__":
+
+def testThreadTime():
     numbers = [1297337, 1116281, 104395303,
                472882027, 533000389, 817504243,
                982451653, 112272535095293,
-               115280095190773, 1099726899285419]*100
+               115280095190773, 1099726899285419]*5
     q = Queue(1000)
 
     for n in numbers:
         q.put(n)
         
     threads = []
-    for i in range(4):
+    for _ in range(4):
         t = PrimeChecker(q)
         threads.append(t)
         t.start()
 
     for t in threads:
         t.join()
+
+
+if __name__ == "__main__":
+    # print(timeit.timeit(testThreadTime))
+    begin = datetime.datetime.now()
+    testThreadTime()
+    end = datetime.datetime.now()
+    print(end - begin)
         
 
         
