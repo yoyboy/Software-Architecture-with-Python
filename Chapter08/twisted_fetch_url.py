@@ -13,14 +13,14 @@ import sys
 
 def save_page(page, filename='content.html'):
     open(filename,'w').write(page)
-    print 'Length of data',len(page)
-    print 'Data saved to',filename
+    print('Length of data',len(page))
+    print('Data saved to',filename)
 
 def handle_error(error):
-    print error
+    print(error)
 
 def finish_processing(value):
-    print "Shutting down..."
+    print("Shutting down...")
     reactor.stop()
 
 if __name__ == "__main__":

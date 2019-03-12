@@ -5,16 +5,17 @@
 Chat client using select based I/O multiplexing
 
 """
+# scp chatclient.py root@95.179.184.41:/root/py_manage
 
 import socket
 import select
 import sys
 from communication import send, receive
 
-class ChatClient(object):
+class ChatClient:
     """ A simple command line chat client using select """
 
-    def __init__(self, name, host='127.0.0.1', port=3490):
+    def __init__(self, name, host="95.179.184.41", port=8080):
         self.name = name
         # Quit flag
         self.flag = False
@@ -28,7 +29,7 @@ class ChatClient(object):
             self.sock.connect((host, self.port))
             print('Connected to chat server@%d' % self.port)
             # Send my name...
-            send(self.sock,'NAME: ' + self.name) 
+            send(self.sock,'NAME: ' + self.name)
             data = receive(self.sock)
             # Contains client address, set it
             addr = data.split('CLIENT: ')[1]
@@ -46,12 +47,13 @@ class ChatClient(object):
                 sys.stdout.flush()
 
                 # Wait for input from stdin & socket
-                inputready, outputready,exceptrdy = select.select([0, self.sock], [],[])
+                inputready, outputready, exceptrdy = select.select([0, self.sock], [],[])
                 
                 for i in inputready:
                     if i == 0:
                         data = sys.stdin.readline().strip()
-                        if data: send(self.sock, data)
+                        if data: 
+                            send(self.sock, data)
                     elif i == self.sock:
                         data = receive(self.sock)
                         if not data:
@@ -70,8 +72,8 @@ class ChatClient(object):
             
 if __name__ == "__main__":
 
-    if len(sys.argv)<3:
-        sys.exit('Usage: %s chatid host portno' % sys.argv[0])
+    # if len(sys.argv)<3:
+    #     sys.exit('Usage: %s chatid host portno' % sys.argv[0])
         
-    client = ChatClient(sys.argv[1],sys.argv[2], int(sys.argv[3]))
+    client = ChatClient(sys.argv[1])
     client.chat()

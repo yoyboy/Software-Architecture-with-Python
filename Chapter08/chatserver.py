@@ -5,7 +5,7 @@
 Chat server using select based I/O multiplexing
 
 """
-
+# scp chatserver.py root@95.179.184.41:/root/py_manage
 # chatserver.py
 
 import socket
@@ -14,10 +14,10 @@ import signal
 import sys
 from communication import send, receive
 
-class ChatServer(object):
+class ChatServer:
     """ Simple chat server using select """
     
-    def __init__(self, port=3490, backlog=5):
+    def __init__(self, port=8080, backlog=5):
         self.clients = 0
         # Client map
         self.clientmap = {}
@@ -58,9 +58,7 @@ class ChatServer(object):
         while running:
 
             try:
-                inputready,outputready,exceptready = select.select(inputs, self.outputs, [])
-            except select.error as e:
-                break
+                inputready, outputready, exceptready = select.select(inputs, self.outputs, [])
             except socket.error as e:
                 break
 

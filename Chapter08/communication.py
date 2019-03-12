@@ -6,6 +6,7 @@ Communication module for serializing and de-serializing messages from
 chat client <-> server
 
 """
+# scp communication.py root@95.179.184.41:/root/py_manage
 
 # communication.py
 import pickle
